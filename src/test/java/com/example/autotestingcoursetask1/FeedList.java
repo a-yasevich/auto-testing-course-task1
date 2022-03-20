@@ -13,54 +13,19 @@ public class FeedList {
         return feedList.exists();
     }
 
-    public boolean hasPosts() {
-        SelenideElement firstPost = feedList.$x("//*[@class=\"feed-w\"]");
-        return firstPost.exists();
-    }
-
     public Repost doRepost() {
-        if (!feedList.exists()) {
-            return null;
-        }
-
-        for (SelenideElement post : listOfPosts) {
-            if (post.exists()) {
-                SelenideElement button = $x("//*[@class=\"widget  __compact\"]/button");
-                button.click();
-                SelenideElement buttonRepost = $x("//*[@data-l=\"t,now\"]");
-                String text = post.text();
-                String href = $x("//a[@class=\"media-link_a\"]").attr("href");
-                Repost repost = new Repost(text, href);
-                buttonRepost.click();
-                return repost;
-            }
-        }
-        return null;
+        SelenideElement firstPost = listOfPosts.first();
+        SelenideElement button = $x("//*[@class=\"widget  __compact\"]/button");
+        button.click();
+        SelenideElement buttonRepost = $x("//*[@data-l=\"t,now\"]");
+        Repost repost = new Repost(firstPost.text(), $x("//a[@class=\"media-link_a\"]").attr("href"));
+        buttonRepost.click();
+        return repost;
     }
 
     public Repost getLastRepost() {
-        ElementsCollection listOfPosts = $$x("//*[@class=\"feed-w\"]");
-        for (SelenideElement post : listOfPosts) {
-            if (post.exists()) {
-                return new Repost(post.text(), $x("//a[@class=\"media-link_a\"]").attr("href"));
-            }
-        }
-        return null;
+        SelenideElement firstPost = listOfPosts.first();
+        return new Repost(firstPost.text(), $x("//a[@class=\"media-link_a\"]").attr("href"));
     }
 
-    public boolean isLastRepost(Repost repost) {
-        if (!feedList.exists()) {
-            return false;
-        }
-        ElementsCollection listOfPosts = $$x("//*[@class=\"feed-w\"]");
-        for (SelenideElement post : listOfPosts) {
-            if (post.exists()) {
-                Repost postOnProfilePage = new Repost(post.text(), $x("//a[@class=\"media-link_a\"]").attr("href"));
-                if (repost.equals(postOnProfilePage)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 }

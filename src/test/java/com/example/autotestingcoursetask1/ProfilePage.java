@@ -7,9 +7,6 @@ public class ProfilePage extends AbstractPage{
         return feedList.hasFeedList();
     }
 
-    public boolean hasRepost(Repost repost) {
-        return feedList.isLastRepost(repost);
-    }
 
     public Repost getLastRepost() {
         return feedList.getLastRepost();
