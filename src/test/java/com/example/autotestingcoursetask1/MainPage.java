@@ -31,7 +31,7 @@ public class MainPage extends AbstractPage {
     }
 
     public ProfilePage openProfilePage() {
-        $x("//*[@id=\"hook_Block_Navigation\"]/div/div/a[1]").click();
+        page.scrollIntoView(false).click();
         return new ProfilePage();
     }
 }
