@@ -16,11 +16,19 @@ public class Repost {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Repost repost = (Repost) o;
-        return text.equals(repost.text) && link.equals(repost.link);
+        return link.equals(repost.link);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(text, link);
+    }
+
+    @Override
+    public String toString() {
+        return "Repost{" +
+                "text='" + text + '\'' +
+                ", link='" + link + '\'' +
+                '}';
     }
 }
