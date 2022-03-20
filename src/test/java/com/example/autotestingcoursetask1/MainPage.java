@@ -4,27 +4,35 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$x;
 
-public class MainPage {
+public class MainPage extends AbstractPage {
     private final SelenideElement photo = $x("//*[@name = \"photo\"]");
-    private final SelenideElement userNavBlock = $x("//*[@id=\"hook_Block_SideNavigation\"]");
     private final SelenideElement userNameField = $x("//*[@class=\"nav-side __navigation __user-main\"]//*[@class=\"tico ellip\"]");
-    private final SelenideElement feedList = $x("//*[@id=\"hook_Block_MainFeedsContent\"]");
-    //private final SelenideElement firstPost = $x("//*[@id=\"hook_Loader_6294288737\"]/*[@class =\"feed-list\"]/*[@class = \"feed-w\"]");
+    private final SelenideElement page = $x("//a[@data-l=\"t,userPage\"]");
+    private final FeedList feedList = new FeedList();
 
-    public boolean assertUserName(String userName) {
-        System.out.println(userNameField.text());
-        return userNameField.text().equals(userName);
+    public String getUserName() {
+        return userNameField.text();
     }
 
-    public boolean containsUniqueElements() {
-        return userNameField.exists() && userNavBlock.exists() && photo.exists() && feedList.exists();
+    public boolean hasPhoto() {
+        return photo.exists();
+    }
+
+    public boolean hasUserNameField() {
+        return userNameField.exists();
+    }
+
+    public boolean hasFeedList() {
+        return feedList.hasFeedList();
     }
 
     public Repost doRepost() {
-        return null;
+        return feedList.doRepost();
     }
 
-    public void openUserPage() {
-        userNameField.click();
+    public ProfilePage openProfilePage() {
+        $x("//*[@id=\"hook_Block_Navigation\"]/div/div/a[1]").click();
+        //new WebDriverWait(getWebDriver(), 10).until(ExpectedConditions.elementToBeClickable($x("//*[@id=\"hook_Block_Navigation\"]/div/div/a[1]").shouldBe(Condition.visible))).click();
+        return new ProfilePage();
     }
 }

@@ -1,18 +1,21 @@
 package com.example.autotestingcoursetask1;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.open;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainPageTest {
     MainPage mainPage;
     LoginPage loginPage = new LoginPage();
+    ProfilePage profilePage;
+
+    private static final String LOGIN = "NO";
+    private static final String PASSWORD = "NO";
 
     @BeforeAll
     public static void setUpAll() {
@@ -26,9 +29,21 @@ public class MainPageTest {
 
     @Test
     public void logIn() {
-        loginPage.enterLoginAndPass("+79062180245", "Pass12345");
+        loginPage.enterLoginAndPass(LOGIN, PASSWORD);
         mainPage = loginPage.doLogIn();
-        assertTrue(mainPage.containsUniqueElements());
-        assertTrue(mainPage.assertUserName("Артем Ясевич"));
+        assertTrue(mainPage.hasUserNameField()
+                && mainPage.hasPhoto()
+                && mainPage.hasUserNavBlock()
+                && mainPage.hasFeedList());
+        assertEquals( "Артем Ясевич", mainPage.getUserName());
+    }
+
+    @Test void addPost() {
+        loginPage.enterLoginAndPass(LOGIN, PASSWORD);
+        mainPage = loginPage.doLogIn();
+        Repost repost = mainPage.doRepost();
+        profilePage = mainPage.openProfilePage();
+        assertTrue(profilePage.hasFeedListUser());
+        assertEquals(repost, profilePage.getLastRepost());
     }
 }
