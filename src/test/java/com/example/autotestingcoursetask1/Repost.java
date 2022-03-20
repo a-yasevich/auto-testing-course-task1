@@ -4,11 +4,11 @@ import java.util.Objects;
 
 public class Repost {
     private final String text;
-    private final String groupName;
+    private final String link;
 
     public Repost(String text, String groupName) {
         this.text = text;
-        this.groupName = groupName;
+        this.link = groupName;
     }
 
     @Override
@@ -16,11 +16,11 @@ public class Repost {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Repost repost = (Repost) o;
-        return text.equals(repost.text) && groupName.equals(repost.groupName);
+        return text.equals(repost.text) && link.equals(repost.link);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, groupName);
+        return Objects.hash(text, link);
     }
 }
