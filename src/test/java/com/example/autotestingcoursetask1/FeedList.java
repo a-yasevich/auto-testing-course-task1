@@ -18,14 +18,14 @@ public class FeedList {
         SelenideElement button = $x("//*[@class=\"widget  __compact\"]/button");
         button.click();
         SelenideElement buttonRepost = $x("//*[@data-l=\"t,now\"]");
-        Repost repost = new Repost(firstPost.text(), $x("//a[@class=\"media-link_a\"]").attr("href"));
-        buttonRepost.click();
+        Repost repost = new Repost(firstPost.text(), $x("//a[@class=\"media-text_a\"]").attr("href"));
+        buttonRepost.scrollIntoView(false).click();
         return repost;
     }
 
     public Repost getLastRepost() {
         SelenideElement firstPost = listOfPosts.first();
-        return new Repost(firstPost.text(), $x("//a[@class=\"media-link_a\"]").attr("href"));
+        return new Repost(firstPost.text(), $x("//a[@class=\"media-text_a\"]").attr("href"));
     }
 
 }
