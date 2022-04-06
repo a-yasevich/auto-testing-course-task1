@@ -1,6 +1,8 @@
-package com.example.autotestingcoursetask1;
+package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import pages.elements.FeedList;
+import utils.Repost;
 
 import static com.codeborne.selenide.Selenide.$x;
 

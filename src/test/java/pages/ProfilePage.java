@@ -1,4 +1,7 @@
-package com.example.autotestingcoursetask1;
+package pages;
+
+import pages.elements.FeedList;
+import utils.Repost;
 
 public class ProfilePage extends AbstractPage{
     private final FeedList feedList = new FeedList();

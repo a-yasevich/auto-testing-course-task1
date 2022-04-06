@@ -1,4 +1,4 @@
-package com.example.autotestingcoursetask1;
+package utils;
 
 import java.util.Objects;
 
