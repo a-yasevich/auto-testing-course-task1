@@ -24,11 +24,4 @@ public class Repost {
         return Objects.hash(text, link);
     }
 
-    @Override
-    public String toString() {
-        return "Repost{" +
-                "text='" + text + '\'' +
-                ", link='" + link + '\'' +
-                '}';
-    }
 }
