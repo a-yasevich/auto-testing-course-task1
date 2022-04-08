@@ -12,7 +12,7 @@ import utils.User;
 import static com.codeborne.selenide.Selenide.*;
 
 public class BaseTest {
-    static final User user = new User("+79062180245", "Test12345", "Артем Ясевич");
+    static final User user = new User("", "", "");
     private static final String LOGIN_URL = "https://www.ok.ru/";
     MainPage mainPage;
 
