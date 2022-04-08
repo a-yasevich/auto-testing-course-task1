@@ -12,30 +12,30 @@ import utils.User;
 import static com.codeborne.selenide.Selenide.*;
 
 public class BaseTest {
-    MainPage mainPage;
+    static final User user = new User("+79062180245", "Test12345", "Артем Ясевич");
     private static final String LOGIN_URL = "https://www.ok.ru/";
-    static final User user = new User("", "", "");
+    MainPage mainPage;
 
     @BeforeAll
     public static void setUpAll() {
         Configuration.browserSize = "1280x800";
+        //Configuration.pageLoadTimeout = 100000;
     }
 
     @BeforeEach
     public void setUp() {
         open(LOGIN_URL);
-        LoginPage page = new LoginPage();
-        mainPage = page.doLogIn(user);
+        mainPage = new LoginPage().logIn(user);
     }
 
     @AfterEach
     public void exit() {
         mainPage.logout();
+        closeWebDriver();
     }
 
     @AfterAll
     public static void close() {
-        closeWindow();
         closeWebDriver();
     }
 

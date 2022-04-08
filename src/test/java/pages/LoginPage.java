@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import utils.User;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
 
 public class LoginPage {
     private final static By LOGIN_FIELD = By.xpath("//*[@id=\"field_email\"]");
@@ -12,8 +11,7 @@ public class LoginPage {
     private final static By LOGIN_BUTTON = By.xpath("//*[@class=\"login-form-actions\"]/input");
 
 
-    public MainPage doLogIn(User user) {
-        refresh();
+    public MainPage logIn(User user) {
         $(LOGIN_FIELD).sendKeys(user.getLogin());
         $(PASSWORD_FIELD).sendKeys(user.getPassword());
         $(LOGIN_BUTTON).click();
