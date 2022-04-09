@@ -10,7 +10,7 @@ repositories {
 }
 
 ext {
-    junitVersion = '5.8.1'
+    junitVersion = '5.8.2'
 }
 
 sourceCompatibility = '17'
@@ -21,9 +21,10 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
-    testImplementation('com.codeborne:selenide:5.25.0')
-    testImplementation('org.slf4j:slf4j-simple:1.7.30')
-
+    implementation group: 'ru.yandex.qatools.matchers', name: 'collection-matchers', version: '1.4.1'
+    testImplementation('com.codeborne:selenide:6.3.5')
+    testImplementation('org.slf4j:slf4j-simple:1.7.36')
+    testImplementation("org.junit.jupiter:junit-jupiter-params:${junitVersion}")
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
