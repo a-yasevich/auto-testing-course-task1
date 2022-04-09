@@ -1,14 +1,16 @@
-package com.example.autotestingcoursetask1;
+package pages;
 
-public class ProfilePage extends AbstractPage{
+import pages.elements.FeedList;
+import utils.FeedItem;
+
+public class ProfilePage extends AbstractPage {
     private final FeedList feedList = new FeedList();
 
     public boolean hasFeedListUser() {
         return feedList.hasFeedList();
     }
 
-
-    public Repost getLastRepost() {
+    public FeedItem getLastFeed() {
         return feedList.getLastRepost();
     }
 

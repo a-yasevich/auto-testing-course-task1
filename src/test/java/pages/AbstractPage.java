@@ -1,4 +1,4 @@
-package com.example.autotestingcoursetask1;
+package pages;
 
 import com.codeborne.selenide.SelenideElement;
 
