@@ -10,7 +10,7 @@ repositories {
 }
 
 ext {
-    junitVersion = '5.8.1'
+    junitVersion = '5.8.2'
 }
 
 sourceCompatibility = '17'
@@ -21,8 +21,8 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
-    testImplementation('com.codeborne:selenide:5.25.0')
-    testImplementation('org.slf4j:slf4j-simple:1.7.30')
+    testImplementation('com.codeborne:selenide:6.4.0')
+    testImplementation('org.slf4j:slf4j-simple:1.7.36')
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
