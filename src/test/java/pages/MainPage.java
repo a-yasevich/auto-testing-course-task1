@@ -1,10 +1,10 @@
 package pages;
 
-import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import pages.elements.FeedList;
 import utils.FeedItem;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class MainPage extends AbstractPage {
@@ -16,15 +16,15 @@ public class MainPage extends AbstractPage {
     private final FeedList feedList = new FeedList();
 
     public String getUserName() {
-        return $(USER_NAME_FIELD).shouldBe(Condition.visible).text();
+        return $(USER_NAME_FIELD).shouldBe(visible).text();
     }
 
     public boolean hasPhoto() {
-        return $(PHOTO).exists();
+        return $(PHOTO).shouldBe(exist).exists();
     }
 
     public boolean hasUserNameField() {
-        return $(USER_NAME_FIELD).exists();
+        return $(USER_NAME_FIELD).shouldBe(exist).exists();
     }
 
     public boolean hasFeedList() {

@@ -4,6 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import utils.FeedItem;
 
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -12,7 +13,7 @@ public class FeedList {
     private final ElementsCollection listOfPosts = $$x("//*[@class=\"feed-w\"]");
 
     public boolean hasFeedList() {
-        return feedList.exists();
+        return feedList.shouldBe(exist).is(exist);
     }
 
     public FeedItem doRepost() {
