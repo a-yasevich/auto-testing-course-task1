@@ -1,5 +1,6 @@
 package pages;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import pages.elements.FeedList;
 import utils.FeedItem;
@@ -19,19 +20,16 @@ public class MainPage extends AbstractPage {
         return $(USER_NAME_FIELD).shouldBe(visible).text();
     }
 
-    public boolean hasPhoto() {
-        return $(PHOTO).shouldBe(exist).exists();
-    }
-
-    public boolean hasUserNameField() {
-        return $(USER_NAME_FIELD).shouldBe(exist).exists();
-    }
-
-    public boolean hasFeedList() {
-        return feedList.hasFeedList();
+    @Override
+    public void check() {
+        super.check();
+        feedList.hasFeedList();
+        $(PHOTO).should(Condition.exist);
+        $(USER_NAME_FIELD).should(Condition.exist).shouldBe(Condition.visible);
     }
 
     public FeedItem doRepost() {
+        feedList.hasFeedList();
         return feedList.doRepost();
     }
 

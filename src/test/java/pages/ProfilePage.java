@@ -6,8 +6,8 @@ import utils.FeedItem;
 public class ProfilePage extends AbstractPage {
     private final FeedList feedList = new FeedList();
 
-    public boolean hasFeedListUser() {
-        return feedList.hasFeedList();
+    public void hasFeedListUser() {
+        feedList.hasFeedList();
     }
 
     public FeedItem getLastFeed() {
