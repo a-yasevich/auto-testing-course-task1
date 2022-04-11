@@ -16,7 +16,7 @@ public class PopularGroupsAdditionTest extends BaseTest {
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 4})
-    public void addGroups(int groupsToAdd) {
+    public void addGroupsFromListOfPopularsTest(int groupsToAdd) {
         List<GroupItem> presentedOnPage = new ArrayList<>();
         List<GroupItem> joined = new ArrayList<>();
         mainPage.openGroupsPage()
@@ -24,7 +24,7 @@ public class PopularGroupsAdditionTest extends BaseTest {
                 .fillListWithPopularGroupsPresentedOnPage(groupsToAdd, presentedOnPage)
                 .joinPopularGroups(groupsToAdd)
                 .fillListWithJoinedGroups(joined);
-        assertEquals(presentedOnPage.size(), joined.size(), "Number of groupsToAdd doesn't match");
-        assertThat(joined, hasSameItemsAsList(presentedOnPage));
+        assertEquals(presentedOnPage.size(), joined.size(), "Number of groups doesn't match");
+        assertThat("Lists should contain same groups", joined, hasSameItemsAsList(presentedOnPage));
     }
 }
