@@ -9,14 +9,13 @@ import static ru.yandex.qatools.matchers.collection.HasSameItemsAsListMatcher.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
 public class PopularGroupsAdditionTest extends BaseTest {
 
     @ParameterizedTest
-    @ValueSource(ints = {3})
+    @ValueSource(ints = {1, 2, 4})
     public void addGroups(int groups) {
         List<GroupItem> actual = new ArrayList<>();
         List<GroupItem> joined = new ArrayList<>();
@@ -25,7 +24,6 @@ public class PopularGroupsAdditionTest extends BaseTest {
                 .fillListWithPopularGroupsPresentedOnPage(groups, actual)
                 .joinPopularGroups(groups)
                 .fillListWithJoinedGroups(joined);
-
         assertEquals(joined.size(), actual.size(), "Number of groups doesn't match");
         assertThat(joined, hasSameItemsAsList(actual));
     }

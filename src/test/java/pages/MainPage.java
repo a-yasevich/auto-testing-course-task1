@@ -41,7 +41,21 @@ public class MainPage extends AbstractPage {
     }
 
     public GroupsPage openGroupsPage() {
-        $(GROUPS_PAGE).scrollIntoView(false).click();
+        try {
+            System.out.println("Openening groups");
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        $(GROUPS_PAGE).scrollIntoView(false)
+                .shouldBe(visible)
+                .click();
+        try {
+            System.out.println("Groups opened");
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return new GroupsPage();
     }
 }

@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
 
 public abstract class AbstractPage {
-    private static final String BASE_URL = "https://www.ok.ru/";
+    private static final String BASE_URL = "https://ok.ru";
     private final SelenideElement userNavBlock = $x("//*[@id=\"hook_Block_SideNavigation\"]");
     private final SelenideElement userCardMini = $x("//div[@class=\"ucard-mini toolbar_ucard js-toolbar-menu\"]");
 
@@ -21,7 +21,8 @@ public abstract class AbstractPage {
     }
 
     public GroupPage openGroupPage(String link) {
-        open(BASE_URL + link);
-        return new GroupPage();
+        String fullLink = BASE_URL + link;
+        open(fullLink);
+        return new GroupPage(fullLink);
     }
 }

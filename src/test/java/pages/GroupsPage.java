@@ -3,7 +3,7 @@ package pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
-import pages.elements.AllMyGroups;
+import pages.elements.AllUserGroupsList;
 import utils.GroupItem;
 
 import java.util.List;
@@ -13,8 +13,6 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class GroupsPage extends AbstractPage {
 
-    private final static By SEARCH_GROUP_FIELD = By.xpath("//*[@id=\"hook_Block_UserGroupSearch2QueryBlock\"]//input");
-    private final static By JOIN_GROUP_BUTTON = By.xpath("//*[@id=\"userGroupsSearchResultList\"]//*[@data-l = \"t,join\"]");
     private final static By POPULAR_GROUPS_LIST = By.xpath("//*[@id=\"hook_Loader_PopularGroupsListBlockLoader\"]//*[@class = \"o group-name-link\"]");
     private final static By JOIN_POPULAR_GROUP_BUTTONS = By.xpath("//*[@id=\"hook_Loader_PopularGroupsListBlockLoader\"]//*[@data-l = \"t,join\"]");
     private final static By USER_GROUPS_LIST_MINIMALISTIC = By.xpath("//*[@id=\"hook_Block_MyGroupsTopBlock\"]//*[@data-group-id]");
@@ -23,15 +21,7 @@ public class GroupsPage extends AbstractPage {
     private final static By ALL_GROUPS = By.xpath("//*[@id=\"hook_Block_MyGroupsTopBlock\"]//*[@class = \"portlet_h_name_t\"]/a");
 
 
-    private final AllMyGroups allMyGroups = new AllMyGroups();
-
-    public GroupsPage findGroup(String groupName) {
-        $(SEARCH_GROUP_FIELD)
-                .shouldBe(visible)
-                .setValue(groupName)
-                .pressEnter();
-        return this;
-    }
+    private final AllUserGroupsList allMyGroups = new AllUserGroupsList();
 
     public GroupsPage clearGroups() {
         ElementsCollection userGroupsList = $$(USER_GROUPS_LIST_MINIMALISTIC);
@@ -60,11 +50,6 @@ public class GroupsPage extends AbstractPage {
             return 0;
         }
         return Integer.parseInt($(USER_GROUPS_COUNT).shouldBe(visible).text());
-    }
-
-    public GroupsPage joinGroup() {
-        $(JOIN_GROUP_BUTTON).shouldBe(visible).click();
-        return this;
     }
 
     public GroupsPage fillListWithPopularGroupsPresentedOnPage(int numberOfGroups, List<GroupItem> groups) {

@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$$;
 
-public class AllMyGroups {
+public class AllUserGroupsList {
     private final static By GROUPS_LIST = By.xpath("//*[@id=\"listBlockPanelUserGroupsSectionBlock\"]//*[@class = \"group-vitrine-card_name\"]");
 
     public List<GroupItem> userGroupsList(int numberOfGroups) {
