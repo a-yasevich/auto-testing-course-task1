@@ -44,4 +44,8 @@ public class MainPage extends AbstractPage {
                 .click();
         return new GroupsPageFactory().get();
     }
+
+    public MessagePage openMessagePage() {
+        return navigationBlock.openMessagePage();
+    }
 }
