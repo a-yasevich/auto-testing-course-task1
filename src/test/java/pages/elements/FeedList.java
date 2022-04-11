@@ -1,5 +1,6 @@
 package pages.elements;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
@@ -11,8 +12,8 @@ public class FeedList {
     private final static By FEED_LIST = By.xpath("//*[@class=\"feed-list\"]");
     private final ElementsCollection listOfPosts = $$x("//*[@class=\"feed-w\"]");
 
-    public boolean hasFeedList() {
-        return $(FEED_LIST).exists();
+    public void hasFeedList() {
+        $(FEED_LIST).should(Condition.exist).shouldBe(Condition.disabled).shouldBe(Condition.visible);
     }
 
     public FeedItem doRepost() {

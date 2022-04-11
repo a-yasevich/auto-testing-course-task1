@@ -1,5 +1,6 @@
 package pages;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
@@ -15,6 +16,12 @@ public abstract class AbstractPage {
 
     public boolean hasUserNavBlock() {
         return $(USER_NAVIGATION_BLOCK).exists();
+    }
+
+    public void check() {
+        $(USER_NAVIGATION_BLOCK).should(Condition.exist)
+                .shouldBe(Condition.disabled)
+                .shouldBe(Condition.visible);
     }
 
     public void logout() {
