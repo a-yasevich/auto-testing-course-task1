@@ -5,17 +5,17 @@ import utils.GroupItem;
 
 import java.util.List;
 
-public class NonEmptyGroups extends AbstractGroupsPage {
+public class GroupsPageWithUserGroups extends AbstractGroupsPage {
     private final UserGroupsList userGroupList = new UserGroupsList();
 
     @Override
-    public EmptyGroups clearGroups() {
+    public GroupsPageWithoutUserGroups clearGroups() {
         userGroupList.clearGroups();
-        return new EmptyGroups();
+        return new GroupsPageWithoutUserGroups();
     }
 
     @Override
-    public NonEmptyGroups fillListWithJoinedGroups(List<GroupItem> groups) {
+    public GroupsPageWithUserGroups fillListWithJoinedGroups(List<GroupItem> groups) {
         groups.addAll(userGroupList.userGroupsList());
         return this;
     }

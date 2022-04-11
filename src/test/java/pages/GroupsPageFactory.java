@@ -13,9 +13,9 @@ public class GroupsPageFactory {
 
     public AbstractGroupsPage get() {
         if (isUserGroupsListPresent()) {
-            return new NonEmptyGroups();
+            return new GroupsPageWithUserGroups();
         } else {
-            return new EmptyGroups();
+            return new GroupsPageWithoutUserGroups();
         }
     }
 

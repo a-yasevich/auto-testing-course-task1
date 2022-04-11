@@ -40,7 +40,7 @@ public class MainPage extends AbstractPage {
         return new ProfilePage();
     }
 
-    public GroupsPage openGroupsPage() {
+    public AbstractGroupsPage openGroupsPage() {
         try {
             System.out.println("Openening groups");
             Thread.sleep(1000);
@@ -56,6 +56,6 @@ public class MainPage extends AbstractPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return new GroupsPage();
+        return new GroupsPageFactory().get();
     }
 }
