@@ -16,15 +16,15 @@ public class PopularGroupsAdditionTest extends BaseTest {
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 4})
-    public void addGroups(int groups) {
-        List<GroupItem> actual = new ArrayList<>();
+    public void addGroups(int groupsToAdd) {
+        List<GroupItem> presentedOnPage = new ArrayList<>();
         List<GroupItem> joined = new ArrayList<>();
         mainPage.openGroupsPage()
                 .clearGroups()
-                .fillListWithPopularGroupsPresentedOnPage(groups, actual)
-                .joinPopularGroups(groups)
+                .fillListWithPopularGroupsPresentedOnPage(groupsToAdd, presentedOnPage)
+                .joinPopularGroups(groupsToAdd)
                 .fillListWithJoinedGroups(joined);
-        assertEquals(joined.size(), actual.size(), "Number of groups doesn't match");
-        assertThat(joined, hasSameItemsAsList(actual));
+        assertEquals(presentedOnPage.size(), joined.size(), "Number of groupsToAdd doesn't match");
+        assertThat(joined, hasSameItemsAsList(presentedOnPage));
     }
 }

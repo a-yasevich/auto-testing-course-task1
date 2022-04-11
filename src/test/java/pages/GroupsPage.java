@@ -1,73 +1,54 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
-import pages.elements.AllUserGroupsList;
+import pages.elements.PopularGroupsList;
+import pages.elements.UserGroupsList;
 import utils.GroupItem;
 
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.refresh;
 
 public class GroupsPage extends AbstractPage {
 
-    private final static By POPULAR_GROUPS_LIST = By.xpath("//*[@id=\"hook_Loader_PopularGroupsListBlockLoader\"]//*[@class = \"o group-name-link\"]");
-    private final static By JOIN_POPULAR_GROUP_BUTTONS = By.xpath("//*[@id=\"hook_Loader_PopularGroupsListBlockLoader\"]//*[@data-l = \"t,join\"]");
-    private final static By USER_GROUPS_LIST_MINIMALISTIC = By.xpath("//*[@id=\"hook_Block_MyGroupsTopBlock\"]//*[@data-group-id]");
-    private final static By USER_GROUPS_COUNT = By.xpath("//*[@id=\"hook_Block_MyGroupsTopBlock\"]//*[@class = \"portlet_h_count\"]");
     private final static By USER_GROUPS_BLOCK = By.xpath("//*[@id=\"hook_Block_MyGroupsTopBlock\"]");
-    private final static By ALL_GROUPS = By.xpath("//*[@id=\"hook_Block_MyGroupsTopBlock\"]//*[@class = \"portlet_h_name_t\"]/a");
+    private final static By GROUPS_PAGE_HEADER = By.xpath("//*[@id=\"hook_Block_LayoutHeader\"]");
 
 
-    private final AllUserGroupsList allMyGroups = new AllUserGroupsList();
+    private final UserGroupsList userGroupList;
+    private final PopularGroupsList popularGroupsList = new PopularGroupsList();
+
+    public GroupsPage() {
+        $(GROUPS_PAGE_HEADER).shouldBe(Condition.exist);
+        userGroupList = $(USER_GROUPS_BLOCK).is(exist) ? new UserGroupsList() : null;
+    }
 
     public GroupsPage clearGroups() {
-        ElementsCollection userGroupsList = $$(USER_GROUPS_LIST_MINIMALISTIC);
-        int joinedGroups = joinedGroupsCount();
-        for (int i = 0; i < joinedGroups; i++) {
-            userGroupsList
-                    .first()
-                    .shouldBe(visible)
-                    .click();
-            GroupPage.leaveFromGroup();
+        if (userGroupList == null) {
+            return this;
         }
-        return this;
+        userGroupList.clearGroups();
+        return new GroupsPage();
     }
 
     public GroupsPage fillListWithJoinedGroups(List<GroupItem> groups) {
-        refresh();
-        int joinedGroups = joinedGroupsCount();
-        $(ALL_GROUPS).shouldBe(visible).click();
-        groups.addAll(allMyGroups.userGroupsList(joinedGroups));
+        if (userGroupList != null) {
+            groups.addAll(userGroupList.userGroupsList());
+        }
         return this;
     }
 
-    public int joinedGroupsCount() {
-        $(USER_GROUPS_BLOCK).shouldBe(Condition.exist);
-        if ($(USER_GROUPS_COUNT).is(not(exist))) {
-            return 0;
-        }
-        return Integer.parseInt($(USER_GROUPS_COUNT).shouldBe(visible).text());
-    }
-
     public GroupsPage fillListWithPopularGroupsPresentedOnPage(int numberOfGroups, List<GroupItem> groups) {
-        ElementsCollection popularGroups = $$(POPULAR_GROUPS_LIST);
-        for (int i = 0; i < numberOfGroups; i++) {
-            String link = popularGroups.get(i).attr("href");
-            String name = popularGroups.get(i).attr("title");
-            groups.add(new GroupItem(name, link));
-        }
-
+        groups.addAll(popularGroupsList.listOfPopularGroups(numberOfGroups));
         return this;
     }
 
     public GroupsPage joinPopularGroups(int groups) {
-        ElementsCollection joinButtons = $$(JOIN_POPULAR_GROUP_BUTTONS);
-        for (int i = 0; i < groups; i++) {
-            joinButtons.get(i).scrollIntoView(false).shouldBe(visible).click();
-        }
-        return this;
+        popularGroupsList.joinPopularGroups(groups);
+        refresh();
+        return new GroupsPage();
     }
 }
