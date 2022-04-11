@@ -12,9 +12,9 @@ public class LoginPage {
     private final static By LOGIN_BUTTON = By.xpath("//*[@class=\"login-form-actions\"]/input");
 
     public void check() {
-        $(LOGIN_FIELD).should(Condition.exist).shouldBe(Condition.disabled).shouldBe(Condition.visible);
-        $(PASSWORD_FIELD).should(Condition.exist).shouldBe(Condition.disabled).shouldBe(Condition.visible);
-        $(LOGIN_BUTTON).should(Condition.exist).shouldBe(Condition.disabled).shouldBe(Condition.visible);
+        $(LOGIN_FIELD).should(Condition.exist).shouldBe(Condition.visible);
+        $(PASSWORD_FIELD).should(Condition.exist).shouldBe(Condition.visible);
+        $(LOGIN_BUTTON).should(Condition.exist).shouldBe(Condition.visible);
     }
 
     public MainPage logIn(User user) {

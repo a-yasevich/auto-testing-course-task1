@@ -13,7 +13,7 @@ public class FeedList {
     private final ElementsCollection listOfPosts = $$x("//*[@class=\"feed-w\"]");
 
     public void hasFeedList() {
-        $(FEED_LIST).should(Condition.exist).shouldBe(Condition.disabled).shouldBe(Condition.visible);
+        $(FEED_LIST).should(Condition.exist).shouldBe(Condition.visible);
     }
 
     public FeedItem doRepost() {

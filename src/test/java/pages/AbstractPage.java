@@ -20,7 +20,6 @@ public abstract class AbstractPage {
 
     public void check() {
         $(USER_NAVIGATION_BLOCK).should(Condition.exist)
-                .shouldBe(Condition.disabled)
                 .shouldBe(Condition.visible);
     }
 

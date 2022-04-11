@@ -22,8 +22,8 @@ public class MainPage extends AbstractPage {
     public void check() {
         super.check();
         feedList.hasFeedList();
-        $(PHOTO).should(Condition.exist).shouldBe(Condition.disabled).shouldBe(Condition.visible);
-        $(USER_NAME_FIELD).should(Condition.exist).shouldBe(Condition.disabled).shouldBe(Condition.visible);
+        $(PHOTO).should(Condition.exist);
+        $(USER_NAME_FIELD).should(Condition.exist).shouldBe(Condition.visible);
     }
 
     public FeedItem doRepost() {
