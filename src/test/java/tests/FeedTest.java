@@ -12,7 +12,7 @@ public class FeedTest extends BaseTest {
     void addPost() {
         FeedItem feedItem = mainPage.doRepost();
         ProfilePage profilePage = mainPage.openProfilePage();
-        assertTrue(profilePage.hasFeedListUser());
+        profilePage.hasFeedListUser();
         assertEquals(feedItem, profilePage.getLastFeed());
     }
 

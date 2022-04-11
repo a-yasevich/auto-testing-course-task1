@@ -19,19 +19,16 @@ public class MainPage extends AbstractPage {
         return $(USER_NAME_FIELD).shouldBe(Condition.visible).text();
     }
 
-    public boolean hasPhoto() {
-        return $(PHOTO).exists();
-    }
-
-    public boolean hasUserNameField() {
-        return $(USER_NAME_FIELD).exists();
-    }
-
-    public boolean hasFeedList() {
-        return feedList.hasFeedList();
+    @Override
+    public void check() {
+        super.check();
+        feedList.hasFeedList();
+        $(PHOTO).should(Condition.exist);
+        $(USER_NAME_FIELD).should(Condition.exist).shouldBe(Condition.visible);
     }
 
     public FeedItem doRepost() {
+        feedList.hasFeedList();
         return feedList.doRepost();
     }
 
