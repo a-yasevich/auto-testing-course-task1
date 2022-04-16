@@ -1,43 +1,38 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static utils.UtilsSelenide.TIMEOUT;
+import static utils.UtilsSelenide.shouldExist;
 
 public class MessagePage {
     private static final By LIST_DIALOGS = By.xpath("//div[@class=\"messenger_side\"]");
     private static final By MSG_INPUT = By.xpath("//msg-input[@data-tsid=\"write_msg_input\"]");
     private static final By MSG_BUTTON = By.xpath("//msg-button[@data-l=\"t,sendButton\"]");
-    private static final By MSG_MESSAGE = By.xpath("//msg-message[@data-tsid=\"message_root\"]");
-    private static final By LIST_MESSAGES = By.xpath("//div[@class=\"group\"]");
     private static final By SPUTNIK_DIALOG = By.xpath("//a[@href=\"/messages/c82629024153782\"]");
+    private static final By LAST_MSG_MESSAGE = By.xpath("//msg-message-list//*[last()-1]//msg-message[@mine][last()]//msg-parsed-text");
+
 
     public void check() {
-        $(LIST_DIALOGS).should(Condition.exist).shouldBe(Condition.visible);
+        shouldExist(LIST_DIALOGS);
         $(SPUTNIK_DIALOG).should(Condition.exist);
     }
 
-    public void sendMessageToSpuntnik(String message) {
-       // $(SPUTNIK_DIALOG).should(Condition.exist).scrollIntoView(false).click();
-        $(SPUTNIK_DIALOG).should(Condition.exist).click();
-
-        $(MSG_INPUT).should(Condition.exist).shouldBe(Condition.visible).click();
-        $(MSG_INPUT).sendKeys(message);
-        $(MSG_BUTTON).should(Condition.exist).shouldBe(Condition.visible).click();
+    private static By selectorDialogUser(String username) {
+        return By.xpath(String.format("//*[text()='%s']", username.trim()));
     }
 
-    public String getLastMessageUserToSpuntik() {
-        ElementsCollection listOfGroupMessages = $$(LIST_MESSAGES);
-        if (listOfGroupMessages.isEmpty()) {
-            return null;
-        }
-        SelenideElement lastGroup = listOfGroupMessages.last();
-        ElementsCollection messages = lastGroup.$$(MSG_MESSAGE);
-        SelenideElement lastUserMessage = messages.last(2).first();
-        return  lastUserMessage.$x("//msg-parsed-text[@data-tsid=\"message_text\"]").getText();
+    public void sendMessage(String username, String message) {
+        shouldExist(selectorDialogUser(username)).shouldBe(Condition.visible, TIMEOUT).click();
+        shouldExist(MSG_INPUT).shouldBe(Condition.visible).click();
+        $(MSG_INPUT).sendKeys(message);
+        shouldExist(MSG_BUTTON).shouldBe(Condition.visible).click();
+    }
+
+    public String getLastMessage(String username) {
+        shouldExist(selectorDialogUser(username)).shouldBe(Condition.visible).click();
+        return shouldExist(LAST_MSG_MESSAGE).shouldBe(Condition.visible).getText();
     }
 }

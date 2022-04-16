@@ -24,4 +24,9 @@ public class FeedItem {
         return Objects.hash(text, link);
     }
 
+
+    @Override
+    public String toString() {
+        return "text: " + text + "\nlink: " + link;
+    }
 }
