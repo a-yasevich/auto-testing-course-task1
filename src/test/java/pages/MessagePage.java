@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static utils.UtilsSelenide.TIMEOUT;
 import static utils.UtilsSelenide.shouldExist;
 
-public class MessagePage {
+public class MessagePage extends ContentPage {
     private static final By LIST_DIALOGS = By.xpath("//div[@class=\"messenger_side\"]");
     private static final By MSG_INPUT = By.xpath("//msg-input[@data-tsid=\"write_msg_input\"]");
     private static final By MSG_BUTTON = By.xpath("//msg-button[@data-l=\"t,sendButton\"]");
@@ -15,6 +15,7 @@ public class MessagePage {
     private static final By LAST_MSG_MESSAGE = By.xpath("//msg-message-list//*[last()-1]//msg-message[@mine][last()]//msg-parsed-text");
 
 
+    @Override
     public void check() {
         shouldExist(LIST_DIALOGS);
         $(SPUTNIK_DIALOG).should(Condition.exist);

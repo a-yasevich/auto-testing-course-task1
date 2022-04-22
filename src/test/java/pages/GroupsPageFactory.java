@@ -11,7 +11,7 @@ public class GroupsPageFactory {
     private final static By USER_GROUPS_BLOCK = By.xpath("//*[@id=\"hook_Block_MyGroupsTopBlock\"]");
     private final static By GROUPS_PAGE_HEADER = By.xpath("//*[@id=\"hook_Block_LayoutHeader\"]");
 
-    public AbstractGroupsPage get() {
+    public ContentGroupsPage get() {
         if (isUserGroupsListPresent()) {
             return new GroupsPageWithUserGroups();
         } else {

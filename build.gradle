@@ -21,13 +21,11 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
-    implementation 'ru.yandex.qatools.matchers:common-matchers:1.4.1'
-    implementation 'ru.yandex.qatools.matchers:collection-matchers:1.4.1'
-    testImplementation 'com.codeborne:selenide:6.4.0'
-    testImplementation 'org.slf4j:slf4j-simple:1.7.36'
-    testImplementation 'org.junit.platform:junit-platform-suite-engine:1.8.2'
-    testImplementation 'org.junit.platform:junit-platform-suite-api:1.8.2'
-    testImplementation 'org.junit.platform:junit-platform-runner:1.8.2'
+    implementation group: 'ru.yandex.qatools.matchers', name: 'collection-matchers', version: '1.4.1'
+    testImplementation('com.codeborne:selenide:6.4.0')
+    testImplementation ('net.serenity-bdd:serenity-jbehave:1.46.0')
+    testImplementation ('com.googlecode.lambdaj:lambdaj:2.3.3')
+    testImplementation('org.slf4j:slf4j-simple:1.7.36')
     testImplementation("org.junit.jupiter:junit-jupiter-params:${junitVersion}")
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")

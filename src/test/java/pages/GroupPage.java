@@ -6,7 +6,7 @@ import utils.GroupItem;
 
 import static com.codeborne.selenide.Selenide.*;
 
-public class GroupPage extends AbstractPage {
+public class GroupPage extends ContentPage {
     private static final By GROUP_BUTTON = By.xpath("//*[@id=\"hook_Block_AltGroupMainMenu\"]//*[@data-l = \"outlandertarget,join,t,join\"]");
     private static final By LEAVE_GROUP = By.xpath("//*[@id=\"hook_Block_AltGroupMainMenu\"]//*[@class = \"dropdown_cnt __wide __show\"]");
     private static final By GROUP_MEMBER = By.xpath("//*[@id=\"hook_Block_AltGroupMainMembersRB\"]//*[@class = \"caption center\"]//a");
@@ -15,6 +15,11 @@ public class GroupPage extends AbstractPage {
 
     public GroupPage(String link) {
         this.link = link;
+    }
+
+    @Override
+    public void check() {
+
     }
 
     public static void leaveFromGroup() {

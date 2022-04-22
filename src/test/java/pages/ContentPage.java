@@ -1,15 +1,13 @@
 package pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import pages.elements.NavigationBlock;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
 
-public abstract class AbstractPage {
+abstract class ContentPage implements Page {
     private static final String BASE_URL = "https://ok.ru";
     private final static By USER_MINI_CARD = By.xpath("//div[@class=\"ucard-mini toolbar_ucard js-toolbar-menu\"]");
     private final static By LOGOUT_LINK = By.xpath("//a[@data-l=\"t,logout\"]");
@@ -17,7 +15,7 @@ public abstract class AbstractPage {
 
     protected final static NavigationBlock navigationBlock= new NavigationBlock();
 
-    public void check() {
+    protected ContentPage() {
         navigationBlock.check();
         $(USER_MINI_CARD).should(Condition.exist)
                 .shouldBe(Condition.visible);
