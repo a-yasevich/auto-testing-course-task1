@@ -21,10 +21,11 @@ public class MainPage extends ContentPage {
     }
 
     @Override
-    public void check() {
+    public MainPage check() {
         feedList.hasFeedList();
         $(PHOTO).should(Condition.exist);
         $(USER_NAME_FIELD).should(Condition.exist).shouldBe(Condition.visible);
+        return this;
     }
 
     public FeedItem doRepost() {

@@ -9,8 +9,7 @@ import utils.GroupItem;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.refresh;
+import static com.codeborne.selenide.Selenide.*;
 
 public class GroupsPage extends ContentPage {
     private final static By USER_GROUPS_BLOCK = By.xpath("//*[@id=\"hook_Block_MyGroupsTopBlock\"]");
@@ -20,8 +19,9 @@ public class GroupsPage extends ContentPage {
     private final UserGroupsList userGroupsList;
 
     @Override
-    public void check() {
+    public GroupsPage check() {
         $(GROUPS_PAGE_HEADER).should(Condition.exist);
+        return this;
     }
 
     protected GroupsPage() {

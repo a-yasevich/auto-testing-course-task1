@@ -16,9 +16,10 @@ public class MessagePage extends ContentPage {
 
 
     @Override
-    public void check() {
+    public MessagePage check() {
         shouldExist(LIST_DIALOGS);
         $(SPUTNIK_DIALOG).should(Condition.exist);
+        return this;
     }
 
     private static By selectorDialogUser(String username) {

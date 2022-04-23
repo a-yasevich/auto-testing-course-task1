@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import utils.GroupItem;
 
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.*;
 
 public class GroupPage extends ContentPage {
@@ -18,8 +19,9 @@ public class GroupPage extends ContentPage {
     }
 
     @Override
-    public void check() {
-
+    public GroupPage check() {
+        $(GROUP_NAME).should(exist);
+        return this;
     }
 
     public static void leaveFromGroup() {

@@ -15,7 +15,8 @@ public class ProfilePage extends ContentPage {
     }
 
     @Override
-    public void check() {
+    public ProfilePage check() {
         hasFeedListUser();
+        return this;
     }
 }
