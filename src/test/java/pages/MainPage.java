@@ -37,11 +37,11 @@ public class MainPage extends ContentPage {
         return new ProfilePage();
     }
 
-    public ContentGroupsPage openGroupsPage() {
+    public GroupsPage openGroupsPage() {
         $(GROUPS_PAGE).scrollIntoView(false)
                 .shouldBe(visible)
                 .click();
-        return new GroupsPageFactory().get();
+        return new GroupsPage();
     }
 
     public MessagePage openMessagePage() {

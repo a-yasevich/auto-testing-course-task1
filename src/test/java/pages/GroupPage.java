@@ -25,7 +25,6 @@ public class GroupPage extends ContentPage {
     public static void leaveFromGroup() {
         $(GROUP_BUTTON).shouldBe(Condition.visible).click();
         $(LEAVE_GROUP).shouldBe(Condition.visible).click();
-        back();
     }
 
     public MainPage goToFirstMember() {
