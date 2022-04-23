@@ -5,10 +5,9 @@ import org.openqa.selenium.By;
 import pages.elements.NavigationBlock;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 
 abstract class ContentPage implements Page {
-    private static final String BASE_URL = "https://ok.ru";
+    protected static final String BASE_URL = "https://ok.ru";
     private final static By USER_MINI_CARD = By.xpath("//div[@class=\"ucard-mini toolbar_ucard js-toolbar-menu\"]");
     private final static By LOGOUT_LINK = By.xpath("//a[@data-l=\"t,logout\"]");
     private final static By LOGOUT_BUTTON = By.xpath("//input[@data-l=\"t,logout\"]");
@@ -27,9 +26,4 @@ abstract class ContentPage implements Page {
         $(LOGOUT_BUTTON).should(Condition.exist).shouldBe(Condition.visible).click();
     }
 
-    public GroupPage openGroupPage(String link) {
-        String fullLink = BASE_URL + link;
-        open(fullLink);
-        return new GroupPage(fullLink);
-    }
 }

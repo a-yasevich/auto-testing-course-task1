@@ -6,6 +6,7 @@ import pages.elements.PopularGroupsList;
 import pages.elements.UserGroupsList;
 import utils.GroupItem;
 
+import java.util.Collections;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.exist;
@@ -28,6 +29,12 @@ public class GroupsPage extends ContentPage {
         userGroupsList = $(USER_GROUPS_BLOCK).is(exist) ? new UserGroupsList() : null;
     }
 
+    public GroupPage openGroupPage(String link) {
+        String fullLink = BASE_URL + link;
+        open(fullLink);
+        return new GroupPage(fullLink);
+    }
+
     public GroupsPage clearGroups() {
         if (userGroupsList != null) {
             userGroupsList.clearGroups();
@@ -35,16 +42,12 @@ public class GroupsPage extends ContentPage {
         return new GroupsPage();
     }
 
-    public GroupsPage fillListWithJoinedGroups(List<GroupItem> groups) {
-        if (userGroupsList != null) {
-            groups.addAll(userGroupsList.userGroupsList());
-        }
-        return this;
+    public List<GroupItem> joinedGroups() {
+        return userGroupsList == null ? Collections.emptyList() : userGroupsList.userGroupsList();
     }
 
-    public GroupsPage fillListWithPopularGroupsPresentedOnPage(int numberOfGroups, List<GroupItem> groups) {
-        groups.addAll(popularGroupsList.listOfPopularGroups(numberOfGroups));
-        return this;
+    public List<GroupItem> popularGroupsPresentedOnPage(int numberOfGroups) {
+        return popularGroupsList.listOfPopularGroups(numberOfGroups);
     }
 
     public GroupsPage joinPopularGroups(int groups) {
