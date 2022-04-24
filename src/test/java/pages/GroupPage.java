@@ -4,9 +4,10 @@ import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import utils.GroupItem;
 
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.*;
 
-public class GroupPage extends AbstractPage {
+public class GroupPage extends ContentPage {
     private static final By GROUP_BUTTON = By.xpath("//*[@id=\"hook_Block_AltGroupMainMenu\"]//*[@data-l = \"outlandertarget,join,t,join\"]");
     private static final By LEAVE_GROUP = By.xpath("//*[@id=\"hook_Block_AltGroupMainMenu\"]//*[@class = \"dropdown_cnt __wide __show\"]");
     private static final By GROUP_MEMBER = By.xpath("//*[@id=\"hook_Block_AltGroupMainMembersRB\"]//*[@class = \"caption center\"]//a");
@@ -17,10 +18,15 @@ public class GroupPage extends AbstractPage {
         this.link = link;
     }
 
+    @Override
+    public GroupPage check() {
+        $(GROUP_NAME).should(exist);
+        return this;
+    }
+
     public static void leaveFromGroup() {
         $(GROUP_BUTTON).shouldBe(Condition.visible).click();
         $(LEAVE_GROUP).shouldBe(Condition.visible).click();
-        back();
     }
 
     public MainPage goToFirstMember() {
