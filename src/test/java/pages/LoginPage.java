@@ -6,15 +6,17 @@ import utils.User;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class LoginPage {
+public class LoginPage implements Page {
     private final static By LOGIN_FIELD = By.xpath("//*[@id=\"field_email\"]");
     private final static By PASSWORD_FIELD = By.xpath("//*[@id=\"field_password\"]");
     private final static By LOGIN_BUTTON = By.xpath("//*[@class=\"login-form-actions\"]/input");
 
-    public void check() {
+    @Override
+    public LoginPage check() {
         $(LOGIN_FIELD).should(Condition.exist).shouldBe(Condition.visible);
         $(PASSWORD_FIELD).should(Condition.exist).shouldBe(Condition.visible);
         $(LOGIN_BUTTON).should(Condition.exist).shouldBe(Condition.visible);
+        return this;
     }
 
     public MainPage logIn(User user) {

@@ -17,20 +17,18 @@ public class GroupAdditionTest extends BaseTest {
     @ParameterizedTest
     @ValueSource(strings = {"/vkedu", "/technopolis", "/v.v..putin"})
     public void addGroupByLinkTest(String link) {
-        GroupPage groupPage = mainPage
-                .openGroupsPage()
-                .clearGroups()
-                .openGroupPage(link)
+        GroupPage groupPage = mainPage.check()
+                .openGroupsPage().check()
+                .clearGroups().check()
+                .openGroupPage(link).check()
                 .joinGroup();
         GroupItem group = groupPage.getGroupItem();
-        mainPage = groupPage.goToFirstMember();
-        mainPage.check();
+        mainPage = groupPage.goToFirstMember().check();
         assertEquals(user.getName(), mainPage.getUserName(), "Wrong user");
-        List<GroupItem> joinedGroups = new ArrayList<>();
-        mainPage.openGroupsPage()
-                .fillListWithJoinedGroups(joinedGroups);
-        assertThat(List.of(group), hasSameItemsAsList(joinedGroups));
-
-
+        List<GroupItem> joinedGroups = mainPage
+                .openGroupsPage()
+                .joinedGroups();
+        assertThat("The group must be the same as the one user added",
+                List.of(group), hasSameItemsAsList(joinedGroups));
     }
 }

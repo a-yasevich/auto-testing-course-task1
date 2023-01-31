@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 
 public class UserGroupsList {
     private final static By GROUPS_LIST = By.xpath("//*[@id=\"listBlockPanelUserGroupsSectionBlock\"]//*[@class = \"group-vitrine-card_name\"]");
@@ -43,6 +42,7 @@ public class UserGroupsList {
                     .shouldBe(visible)
                     .click();
             GroupPage.leaveFromGroup();
+            back();
         }
     }
 

@@ -8,7 +8,7 @@ import utils.FeedItem;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
-public class MainPage extends AbstractPage {
+public class MainPage extends ContentPage {
     private final static By PHOTO = By.xpath("//*[@name = \"photo\"]");
     private final static By USER_NAME_FIELD = By.xpath("//*[@class=\"nav-side __navigation __user-main\"]//*[@class=\"tico ellip\"]");
     private final static By PAGE = By.xpath("//*[@class=\"nav-side __navigation __user-main\"]//*[@class=\"tico ellip\"]");
@@ -21,11 +21,11 @@ public class MainPage extends AbstractPage {
     }
 
     @Override
-    public void check() {
-        super.check();
+    public MainPage check() {
         feedList.hasFeedList();
         $(PHOTO).should(Condition.exist);
         $(USER_NAME_FIELD).should(Condition.exist).shouldBe(Condition.visible);
+        return this;
     }
 
     public FeedItem doRepost() {
@@ -38,11 +38,11 @@ public class MainPage extends AbstractPage {
         return new ProfilePage();
     }
 
-    public AbstractGroupsPage openGroupsPage() {
+    public GroupsPage openGroupsPage() {
         $(GROUPS_PAGE).scrollIntoView(false)
                 .shouldBe(visible)
                 .click();
-        return new GroupsPageFactory().get();
+        return new GroupsPage();
     }
 
     public MessagePage openMessagePage() {
